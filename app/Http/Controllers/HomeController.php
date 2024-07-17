@@ -50,6 +50,6 @@ class HomeController extends Controller
                     $query->where('name', 'LIKE', "%$searchQuery%");
                 }
             })
-            ->get();
+            ->paginate(12);
     }
 }

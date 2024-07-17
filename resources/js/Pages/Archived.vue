@@ -6,14 +6,12 @@ import { TaskStatus } from "@/Enums/TaskStatus";
 import { provide } from "vue";
 
 const props = defineProps({
-  tasks: Object,
+    tasks: Object,
 });
-
-provide("tasks", props.tasks);
 </script>
 
 <template>
-  <MasterLayout>
-    <task-board :taskStatus="TaskStatus.INACTIVE" />
-  </MasterLayout>
+    <MasterLayout>
+        <task-board :tasks="tasks" :taskStatus="TaskStatus.INACTIVE" />
+    </MasterLayout>
 </template>

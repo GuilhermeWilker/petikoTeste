@@ -8,19 +8,17 @@ import { provide, ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
-  user: Object,
-  tasks: Object,
+    user: Object,
+    tasks: Object,
 });
-
-provide("tasks", props.tasks);
 </script>
 
 <template>
-  <MasterLayout>
-    <section>
-      <div class="w-full">
-        <task-board :taskStatus="TaskStatus.ACTIVE" />
-      </div>
-    </section>
-  </MasterLayout>
+    <MasterLayout>
+        <section>
+            <div class="w-full">
+                <task-board :tasks="tasks" :taskStatus="TaskStatus.ACTIVE" />
+            </div>
+        </section>
+    </MasterLayout>
 </template>
