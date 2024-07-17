@@ -29,7 +29,14 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get("/admin", [AdminController::class, 'index'])
+    ->middleware(AdminMiddleware::class)->name("admin");
+
+Route::get('/admin/create/user', [AdminController::class, 'create'])
+    ->middleware(AdminMiddleware::class)->name("admin.create");
+
+Route::post('/user', [AdminController::class, 'store'])
     ->middleware(AdminMiddleware::class);
+
 
 
 Route::middleware('auth')->group(function () {

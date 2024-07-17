@@ -3,7 +3,8 @@ import MasterLayout from "@/Layouts/MasterLayout.vue";
 import TaskForm from "@/Components/TaskForm.vue";
 import UserList from "@/Components/UserList.vue";
 
-import { useForm, usePage, Link } from "@inertiajs/vue3";
+import { provide } from "vue";
+import { useForm } from "@inertiajs/vue3";
 
 const props = defineProps({
     users: Object,
@@ -15,6 +16,8 @@ const form = useForm({
     description: null,
     deadline: null,
 });
+
+provide("users", props.users);
 </script>
 
 <template>

@@ -1,16 +1,13 @@
 <script setup>
-import { ref } from "vue";
+import { inject } from "vue";
 import { useForm } from "@inertiajs/vue3";
-
-const props = defineProps({
-    users: Object,
-});
 
 const form = useForm({
     user_id: null,
     name: null,
     description: null,
     deadline: null,
+    errors: {},
 });
 
 const submitForm = () => {
@@ -22,14 +19,27 @@ const submitForm = () => {
         return;
     }
 
-    form.post("/task");
+    form.post("/task")
+        .then(() => {
+            form.user_id = null;
+            form.name = null;
+            form.description = null;
+            form.deadline = null;
+        })
+        .catch((error) => {
+            if (error.response.status === 422) {
+                form.errors = error.response.data.errors;
+            }
+        });
 };
+
+const users = inject("users");
 </script>
 
 <template>
     <div class="w-full">
         <h3 class="text-lg text-primary font-bold block my-4">
-            <i class="fa-solid fa-list-check"></i> Criar tarefa
+            Criar tarefa <i class="fa-regular fa-circle-check"></i>
         </h3>
 
         <form
@@ -39,13 +49,19 @@ const submitForm = () => {
             <div class="w-full mb-2">
                 <label for="title" class="block font-bold my-1">Título:</label>
                 <input
-                    required
                     v-model="form.name"
                     type="text"
                     id="title"
                     class="p-2 px-4 border rounded-sm border-primary bg-background w-full"
                     placeholder="Descascar Amendoins"
                 />
+
+                <span
+                    v-if="form.errors.name"
+                    class="block text-[.9em] text-red-500 font-medium"
+                >
+                    {{ form.errors.name }}
+                </span>
             </div>
 
             <div class="w-full my-2">
@@ -53,13 +69,19 @@ const submitForm = () => {
                     >Descrição:</label
                 >
                 <input
-                    required
                     v-model="form.description"
                     type="text"
                     id="description"
                     class="p-2 px-4 border rounded-sm border-primary bg-background w-full"
                     placeholder="Utilizar martelinho de madeira"
                 />
+
+                <span
+                    v-if="form.errors.description"
+                    class="block text-[.9em] text-red-500 font-medium"
+                >
+                    {{ form.errors.description }}
+                </span>
             </div>
 
             <!-- Flex col-2 -->
@@ -69,19 +91,25 @@ const submitForm = () => {
                         >Designar tarefa:</label
                     >
                     <select
-                        required
                         v-model="form.user_id"
                         id="user"
                         class="p-2 px-4 border rounded-sm border-primary bg-background w-full"
                     >
                         <option
-                            v-for="user in props.users.data"
+                            v-for="user in users.data"
                             :key="user.id"
                             :value="user.id"
                         >
                             {{ user.name }}
                         </option>
                     </select>
+
+                    <span
+                        v-if="form.errors.user_id"
+                        class="block text-[.9em] text-red-500 font-medium"
+                    >
+                        {{ form.errors.user_id }}
+                    </span>
                 </div>
 
                 <div class="w-full">
@@ -89,12 +117,18 @@ const submitForm = () => {
                         >Encerramento:</label
                     >
                     <input
-                        required
                         v-model="form.deadline"
                         type="datetime-local"
                         id="deadline"
                         class="p-2 px-4 border rounded-sm border-primary bg-background w-full"
                     />
+
+                    <span
+                        v-if="form.errors.deadline"
+                        class="block text-[.9em] text-red-500 font-medium"
+                    >
+                        {{ form.errors.deadline }}
+                    </span>
                 </div>
             </div>
 

@@ -27,14 +27,14 @@ const props = defineProps({
             <!-- divider -->
             <div v-if="props.user?.is_admin">
                 <p class="text-sm text-primary font-bold px-2 mb-1 mt-4">
-                    Dashboard
+                    Administrativo
                 </p>
 
                 <sidebar-link :url="'/admin'" :icon="'chart-line'">
-                    Tarefas
+                    Dashboard
                 </sidebar-link>
 
-                <sidebar-link :url="'/admin'" :icon="'users'">
+                <sidebar-link :url="'/admin/create/user'" :icon="'users'">
                     Novo usuário
                 </sidebar-link>
             </div>

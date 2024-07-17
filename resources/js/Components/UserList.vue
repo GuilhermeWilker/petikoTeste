@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
     <div class="p-2 w-full overflow-y-auto">
         <h3 class="text-lg text-primary font-bold block my-4">
-            Usuários cadastrados
+            Usuários cadastrados <i class="fa-solid fa-users"></i>
         </h3>
 
         <template v-if="props.users.data.length">
@@ -27,18 +27,20 @@ const props = defineProps({
             <p>Nenhum usuário encontrado.</p>
         </template>
 
-        <Link
-            v-if="props.users.prev_page_url"
-            :href="props.users.prev_page_url"
-            class="text-primary hover:underline"
-            >&lt; Anterior</Link
-        >
-        <span class="mx-2">{{ props.users.current_page }}</span>
-        <Link
-            v-if="props.users.next_page_url"
-            :href="props.users.next_page_url"
-            class="text-primary hover:underline"
-            >Próximo &gt;</Link
-        >
+        <div class="w-fit mx-auto">
+            <Link
+                v-if="props.users.prev_page_url"
+                :href="props.users.prev_page_url"
+                class="text-primary hover:underline"
+                >&lt; Anterior</Link
+            >
+            <span class="mx-2">{{ props.users.current_page }}</span>
+            <Link
+                v-if="props.users.next_page_url"
+                :href="props.users.next_page_url"
+                class="text-primary hover:underline"
+                >Próximo &gt;</Link
+            >
+        </div>
     </div>
 </template>
