@@ -75,6 +75,11 @@ npm run dev
 php artisan key:generate
 ```
 
+### Realizar as migrations do banco de dados
+```bash
+php artisan migrate
+```
+
 ### Gerar seeder de usuário Administrador
 
 ```bash
