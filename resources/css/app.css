@@ -1,0 +1,16 @@
+/* Tailwind CSS customizations */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  .flex-basis-1\4 {
+    flex-basis: 25%;
+  }
+  .flex-grow-0 {
+    flex-grow: 0;
+  }
+  .flex-shrink {
+    flex-shrink: 0;
+  }
+
