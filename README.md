@@ -1,4 +1,4 @@
-# Título do Projeto
+# PetikoT
 
 Projeto realizado para o teste técnico de Desenvolvedor Backend PHP Júnior para a **Petiko**.
 
